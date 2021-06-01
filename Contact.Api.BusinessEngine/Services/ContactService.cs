@@ -40,7 +40,7 @@ namespace Contact.Api.Service.Services
                 foreach (var informationEntityModel in informationEntityModelList)
                 {
                     informationEntityModel.UUID = contactEntityModel.UUID;
-                    var informationResult = mongoService.AddDocument(informationEntityModel.ToBsonDocument(), Common.Enums.MongoCollectionType.Information);
+                    var informationResult = mongoService.AddDocument(informationEntityModel.ToBsonDocument(), MongoCollectionType.Information);
                     informationResulList.Add(informationResult);
                 }
 

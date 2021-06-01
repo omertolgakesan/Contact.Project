@@ -112,12 +112,14 @@ namespace Contact.Api.Data.Mongo
 
         public bool UpdateContact(ContactDto contactDto, MongoCollectionType collectionType)
         {
-            //var filter = Builders<ContactEntityModel>.Filter.Eq("UUID", contactDto.UUID);
-            //var update = Builders<ContactEntityModel>.Update.Set("Created", DateTime.UtcNow);
-            //var collection = MongoDatabase.GetCollection<ContactEntityModel>(collectionType.ToString("g"));
-            //var contact = collection.Find(x => x.UUID == contactDto.UUID).FirstOrDefault();
-            //collection.UpdateOne(filter,update,null);
+            var collection = MongoDatabase.GetCollection<ContactEntityModel>(collectionType.ToString("g"));
+            var filter = Builders<ContactEntityModel>.Filter.Eq(x => x.UUID, contactDto.UUID);
+            var update = Builders<ContactEntityModel>.Update
+                .Set(x => x.Name, contactDto.Name)
+                .Set(x => x.Lastname, contactDto.Lastname)
+                .Set(x => x.Firm, contactDto.Firm);
 
+            var result = collection.UpdateOne(filter, update);
             return true;
         }
     }
