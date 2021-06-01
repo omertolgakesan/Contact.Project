@@ -1,3 +1,7 @@
+using Contact.Api.Services;
+using Contact.Api.Common;
+using Contact.Api.Common.Conracts;
+using Contact.Api.Common.Helper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -11,6 +15,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Contact.Api.Mapper;
+using Contact.Api.Service.Services;
+using Contact.Api.Data.Mongo;
 
 namespace Contact.Api
 {
@@ -26,6 +33,19 @@ namespace Contact.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.RegisterContactCoreServices(Configuration);
+            services.RegisterMappingProfiles();
+
+            services.AddStackExchangeRedisCache(action =>
+            {
+                action.Configuration = "localhost:6379";
+            });
+            services.AddScoped<IReportService, ReportService>();
+            services.AddScoped<IContactService, ContactService>();
+            services.AddScoped<IMongoService, MongoService>();
+            services.AddScoped<IMongoProvider, MongoProvider>();
+
+            DIServiceProvider.ServiceProvider = services.BuildServiceProvider();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

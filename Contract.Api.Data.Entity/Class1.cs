@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Contact.Api.Common
+namespace Contract.Api.Data.Entity
 {
     public class Class1
     {

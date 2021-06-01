@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Contact.Api.Common;
+using Contact.Api.Common.Conracts;
+using Contact.Api.Common.Dto;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,6 +14,22 @@ namespace Contact.Api.Controllers
     [ApiController]
     public class ReportController : ControllerBase
     {
+        private readonly IReportService reportService;
 
+        public ReportController(IReportService iReportService)
+        {
+            reportService = iReportService;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="location"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public BaseServiceResponseModel<ContactReportDto> GetLocationReport(string location)
+        {
+           return reportService.GetLocationReport(location);
+        }
     }
 }
