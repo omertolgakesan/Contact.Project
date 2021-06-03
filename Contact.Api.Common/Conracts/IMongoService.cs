@@ -11,7 +11,9 @@ namespace Contact.Api.Common.Conracts
 {
     public interface IMongoService
     {
+        ContactEntityModel GetContact(string uuid, MongoCollectionType collectionType);
         bool AddDocument(BsonDocument document, MongoCollectionType collectionType);
+        bool AddDocuments(List<BsonDocument> documents, MongoCollectionType collectionType);
         bool DeleteContact(string UUID, MongoCollectionType collectionType);
         bool DeleteContactInformation(string UUID, MongoCollectionType ınformation);
         List<ContactEntityModel> GetContactList(MongoCollectionType collectionType);
@@ -19,5 +21,6 @@ namespace Contact.Api.Common.Conracts
         List<string> GetContactUuidListByLocation(string location, MongoCollectionType ınformation);
         List<ContactEntityModel> GetContactListListByUuid(List<string> contactInformations, MongoCollectionType contact);
         bool UpdateContact(ContactDto contactDto, MongoCollectionType contact);
+        bool DeleteContactInformation(List<InformationEntityModel> contactInformationEntityModels, MongoCollectionType ınformation);
     }
 }

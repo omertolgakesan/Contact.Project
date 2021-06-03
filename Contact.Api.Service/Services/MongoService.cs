@@ -24,6 +24,11 @@ namespace Contact.Api.Service.Services
             return mongoProvider.AddDocument(document, mongoCollectionType);
         }
 
+        public bool AddDocuments(List<BsonDocument> documents, MongoCollectionType collectionType)
+        {
+            return mongoProvider.AddDocuments(documents, collectionType);
+        }
+
         public bool DeleteContact(string UUID, MongoCollectionType collectionType)
         {
             return mongoProvider.DeleteContact(UUID, collectionType);
@@ -32,6 +37,16 @@ namespace Contact.Api.Service.Services
         public bool DeleteContactInformation(string UUID, MongoCollectionType collectionType)
         {
             return mongoProvider.DeleteContactInformation(UUID, collectionType);
+        }
+
+        public bool DeleteContactInformation(List<InformationEntityModel> contactInformationEntityModels, MongoCollectionType collectionType)
+        {
+            return mongoProvider.DeleteContactInformation(contactInformationEntityModels, collectionType);
+        }
+
+        public ContactEntityModel GetContact(string uuid, MongoCollectionType collectionType)
+        {
+            return mongoProvider.GetContact(uuid, collectionType);
         }
 
         public List<InformationEntityModel> GetContactInformationList(string uUID, MongoCollectionType collectionType)

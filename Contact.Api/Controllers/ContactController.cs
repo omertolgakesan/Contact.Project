@@ -22,24 +22,13 @@ namespace Contact.Api.Controllers
         }
 
         /// <summary>
-        /// Get the contact list
+        /// Get the contact information
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public BaseServiceResponseModel<List<ContactDto>> GetContacts()
+        public BaseServiceResponseModel<ContactDetailDto> GetContact(string uuid)
         {
-            return contactService.GetContacts();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="UUID"></param>
-        /// <returns></returns>
-        [HttpGet("GetContactInformation")]
-        public BaseServiceResponseModel<ContactInformationDto> GetContactInformations(string UUID)
-        {
-            return contactService.GetContactInformations(UUID);
+            return contactService.GetContact(uuid);
         }
 
         /// <summary>
@@ -59,17 +48,6 @@ namespace Contact.Api.Controllers
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="UUID"></param>
-        /// <returns></returns>
-        [HttpDelete]
-        public BaseServiceResponseModel<bool> DeleteContact(string UUID)
-        {
-            return contactService.DeleteContact(UUID);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         /// <param name="contactDto"></param>
         /// <returns></returns>
         [HttpPut]
@@ -78,5 +56,53 @@ namespace Contact.Api.Controllers
             return contactService.UpdateContact(contactDto);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="UUID"></param>
+        /// <returns></returns>
+        [HttpDelete]
+        public BaseServiceResponseModel<bool> DeleteContact(string uuid)
+        {
+            return contactService.DeleteContact(uuid);
+        }
+
+        /// <summary>
+        /// Get the contact list
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("ContactList")]
+        public BaseServiceResponseModel<List<ContactDto>> GetContacts()
+        {
+            return contactService.GetContacts();
+        }
+       
+        /// <summary>
+        /// ContactInformationType
+        /// Phone:1
+        /// Email:2
+        /// Location:3
+        /// </summary>
+        /// <param name="contactModel"></param>
+        /// <returns></returns>
+        [HttpPost("addcontactInformation")]
+        public BaseServiceResponseModel<bool> AddContactInformation(ContactInformationModel contactInformationModel)
+        {
+            return contactService.AddContactInformation(contactInformationModel);
+        }
+
+        /// <summary>
+        /// ContactInformationType
+        /// Phone:1
+        /// Email:2
+        /// Location:3
+        /// </summary>
+        /// <param name="contactModel"></param>
+        /// <returns></returns>
+        [HttpDelete("deletecontactInformation")]
+        public BaseServiceResponseModel<bool> DeleteContactInformation(ContactInformationModel contactInformationModel)
+        {
+            return contactService.DeleteContactInformation(contactInformationModel);
+        }
     }
 }

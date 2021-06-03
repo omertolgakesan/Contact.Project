@@ -122,5 +122,43 @@ namespace Contact.Api.Data.Mongo
             var result = collection.UpdateOne(filter, update);
             return true;
         }
+
+        public ContactEntityModel GetContact(string uuid, MongoCollectionType collectionType)
+        {
+            var collection = MongoDatabase.GetCollection<ContactEntityModel>(collectionType.ToString("g"));
+            return collection.AsQueryable().FirstOrDefault(x => x.UUID == uuid);
+        }
+
+        public bool AddDocuments(List<BsonDocument> documents, MongoCollectionType mongoCollectionType)
+        {
+            var retVal = true;
+            var collection = MongoDatabase.GetCollection<BsonDocument>(mongoCollectionType.ToString("g"));
+            try
+            {
+                collection.InsertMany(documents);
+            }
+            catch (Exception ex)
+            {
+                retVal = false;
+            }
+            return retVal;
+        }
+
+        public bool DeleteContactInformation(List<InformationEntityModel> contactInformationEntityModels, MongoCollectionType collectionType)
+        {
+            var retval = new List<bool>();
+            var collection = MongoDatabase.GetCollection<InformationEntityModel>(collectionType.ToString("g"));
+            foreach (var contactInformationEntityModel in contactInformationEntityModels)
+            {
+                var filter = Builders<InformationEntityModel>.Filter.Where(x =>
+                x.UUID == contactInformationEntityModel.UUID &&
+                x.ContactInformationType == contactInformationEntityModel.ContactInformationType &&
+                x.InformationDescription == contactInformationEntityModel.InformationDescription);
+                var result = collection.DeleteOne(filter);
+                retval.Add(result.DeletedCount > 0);
+            }
+
+            return retval.TrueForAll(x => x);
+        }
     }
 }

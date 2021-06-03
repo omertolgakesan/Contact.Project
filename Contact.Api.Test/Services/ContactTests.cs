@@ -52,5 +52,11 @@ namespace Contact.Api.Service.Services.Tests
         {
             Assert.Fail();
         }
+
+        [TestMethod()]
+        public void DeleteContactInformationTest()
+        {
+            Assert.Fail();
+        }
     }
 }

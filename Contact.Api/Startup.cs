@@ -1,4 +1,3 @@
-using Contact.Api.Services;
 using Contact.Api.Common;
 using Contact.Api.Common.Conracts;
 using Contact.Api.Common.Helper;
@@ -16,8 +15,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Contact.Api.Mapper;
-using Contact.Api.Service.Services;
 using Contact.Api.Data.Mongo;
+using Contact.Api.Services;
+using Contact.Api.Service.Services;
 
 namespace Contact.Api
 {
@@ -43,7 +43,9 @@ namespace Contact.Api
             services.AddScoped<IReportService, ReportService>();
             services.AddScoped<IContactService, ContactService>();
             services.AddScoped<IMongoService, MongoService>();
-            services.AddScoped<IMongoProvider, MongoProvider>();
+
+            services.Configure<MongoSetting>(Configuration.GetSection("MongoSettings"));
+            services.AddSingleton<IMongoProvider, MongoProvider>();
 
             DIServiceProvider.ServiceProvider = services.BuildServiceProvider();
 

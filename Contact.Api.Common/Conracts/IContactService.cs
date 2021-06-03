@@ -8,10 +8,12 @@ namespace Contact.Api.Common.Conracts
 {
     public interface IContactService
     {
+        BaseServiceResponseModel<ContactDetailDto> GetContact(string uuid);
         BaseServiceResponseModel<bool> AddContact(ContactModel contactModel);
-        BaseServiceResponseModel<bool> DeleteContact(string UUID);
-        BaseServiceResponseModel<List<ContactDto>> GetContacts();
-        BaseServiceResponseModel<ContactInformationDto> GetContactInformations(string uUID);
         BaseServiceResponseModel<bool> UpdateContact(ContactDto contactDto);
+        BaseServiceResponseModel<bool> DeleteContact(string uuid);
+        BaseServiceResponseModel<List<ContactDto>> GetContacts();
+        BaseServiceResponseModel<bool> AddContactInformation(ContactInformationModel contactInformationModel);
+        BaseServiceResponseModel<bool> DeleteContactInformation(ContactInformationModel contactInformationModel);
     }
 }

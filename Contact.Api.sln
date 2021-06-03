@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contact.Api", "Contact.Api\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contact.Api.Common", "Contact.Api.Common\Contact.Api.Common.csproj", "{AE25E4EC-F210-4530-8A67-1F03D90FE331}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contact.Api.Service", "Contact.Api.BusinessEngine\Contact.Api.Service.csproj", "{B50310C0-D2BB-4D5A-A481-A72D859121A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contact.Api.Service", "Contact.Api.Service\Contact.Api.Service.csproj", "{B50310C0-D2BB-4D5A-A481-A72D859121A1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contact.Api.Data.Mongo", "Contract.Api.Data\Contact.Api.Data.Mongo.csproj", "{EE40FDAA-525E-4961-B940-5C8433DA3F54}"
 EndProject

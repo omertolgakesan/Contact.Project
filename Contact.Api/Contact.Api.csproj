@@ -13,9 +13,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Contact.Api.BusinessEngine\Contact.Api.Service.csproj" />
     <ProjectReference Include="..\Contact.Api.Common\Contact.Api.Common.csproj" />
     <ProjectReference Include="..\Contact.Api.Mapper\Contact.Api.Mapper.csproj" />
+    <ProjectReference Include="..\Contact.Api.Service\Contact.Api.Service.csproj" />
   </ItemGroup>
 
 </Project>

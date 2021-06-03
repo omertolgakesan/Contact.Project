@@ -18,17 +18,18 @@ namespace Contact.Api.Mapper.Contact
             CreateMap<InformationModel, InformationEntityModel>();
 
             CreateMap<ContactEntityModel, ContactDto>();
+
+            CreateMap<ContactEntityModel, ContactDetailDto>();
+
             CreateMap<InformationEntityModel, ContactInformationDto>();
 
-
-            CreateMap<List<InformationEntityModel>, ContactInformationDto>()
-            .ForMember(x => x.UUID, opt => opt.MapFrom(y => y.Select(z => z.UUID).FirstOrDefault()))
-            .ForMember(x => x.Informations, opt => opt.MapFrom(y => y.Select(z =>
-                  new InformationDto
-                  {
-                      InformationDescription = z.InformationDescription,
-                      InformationType = z.ContactInformationType
-                  })));
+            //CreateMap<List<InformationEntityModel>, ContactDetailDto>()
+            //.ForMember(x => x.Informations, opt => opt.MapFrom(y => y.Select(z =>
+            //      new ContactInformationDto
+            //      {
+            //          InformationDescription = z.InformationDescription,
+            //          ContactInformationType = z.ContactInformationType
+            //      })));
 
 
             CreateMap<List<ContactEntityModel>, ContactReportDto>()
