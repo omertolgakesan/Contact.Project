@@ -42,10 +42,13 @@ namespace Contact.Api.Service.Services
                 var retval = mapperBase.Map<ContactDetailDto>(contact);
 
                 var contactInformationEntityList = mongoService.GetContactInformationList(uuid, MongoCollectionType.Information);
+                if (contactInformationEntityList.Any())
+                {
+                    var contactInformationDtoList = contactInformationEntityList.Select(mapperBase.Map<InformationEntityModel, ContactInformationDto>).ToList();
 
-                var contactInformationDtoList = contactInformationEntityList.Select(mapperBase.Map<InformationEntityModel, ContactInformationDto>).ToList();
-
-                retval.Informations = contactInformationDtoList;
+                    retval.Informations = contactInformationDtoList;
+                }
+                
                 var json = JsonConvert.SerializeObject(retval);
                 var retvalArray = Encoding.UTF8.GetBytes(json);
 
@@ -71,24 +74,32 @@ namespace Contact.Api.Service.Services
 
             if (contactResult)
             {
-                var informationEntityModelList = contactModel.InformationModels.Select(mapperBase.Map<InformationModel, InformationEntityModel>).ToList();
-
-                List<bool> informationResulList = new();
-                foreach (var informationEntityModel in informationEntityModelList)
+                if (contactModel.InformationModels.Any())
                 {
-                    informationEntityModel.UUID = contactEntityModel.UUID;
-                    var informationResult = mongoService.AddDocument(informationEntityModel.ToBsonDocument(), MongoCollectionType.Information);
-                    informationResulList.Add(informationResult);
-                }
+                    var informationEntityModelList = contactModel.InformationModels.Select(mapperBase.Map<InformationModel, InformationEntityModel>).ToList();
 
-                if (informationResulList.TrueForAll(x => x))
-                {
-                    return ResponseMessageHelper<bool>.ResponseOk(true);
+                    List<bool> informationResulList = new();
+                    foreach (var informationEntityModel in informationEntityModelList)
+                    {
+                        informationEntityModel.UUID = contactEntityModel.UUID;
+                        var informationResult = mongoService.AddDocument(informationEntityModel.ToBsonDocument(), MongoCollectionType.Information);
+                        informationResulList.Add(informationResult);
+                    }
+
+                    if (informationResulList.TrueForAll(x => x))
+                    {
+                        return ResponseMessageHelper<bool>.ResponseOk(true);
+                    }
+                    else
+                    {
+                        return ResponseMessageHelper<bool>.ResponseError(AppMessageConstants.GenericException);
+                    }
                 }
                 else
                 {
-                    return ResponseMessageHelper<bool>.ResponseError(AppMessageConstants.GenericException);
+                    return ResponseMessageHelper<bool>.ResponseOk(contactResult);
                 }
+                
             }
             else
             {
@@ -101,7 +112,14 @@ namespace Contact.Api.Service.Services
         {
             bool result = mongoService.UpdateContact(contactDto, MongoCollectionType.Contact);
 
-            return ResponseMessageHelper<bool>.ResponseOk(result);
+            if (result)
+            {
+                return ResponseMessageHelper<bool>.ResponseOk(result);
+            }
+            else
+            {
+                return ResponseMessageHelper<bool>.ResponseOk(result, AppMessageConstants.RecordNotFound);
+            }
         }
 
         public BaseServiceResponseModel<bool> DeleteContact(string uuid)
@@ -131,6 +149,7 @@ namespace Contact.Api.Service.Services
             if (cacheData == null)
             {
                 List<ContactEntityModel> contactList = mongoService.GetContactList(MongoCollectionType.Contact);
+
                 var retval = contactList.Select(mapperBase.Map<ContactEntityModel, ContactDto>).ToList();
 
                 var json = JsonConvert.SerializeObject(retval);

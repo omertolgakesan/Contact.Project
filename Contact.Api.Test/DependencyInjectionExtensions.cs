@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Contact.Api.Common.Helper;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -16,6 +18,9 @@ namespace Contact.Api.Test
             mock.CallBase = callbase;
             services.AddSingleton<Mock<T>>(mock);
             services.AddSingleton<T>(mock.Object);
+
+            DIServiceProvider.ServiceProvider = services.BuildServiceProvider();
+
             return mock;
         }
 
