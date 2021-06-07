@@ -98,18 +98,6 @@ namespace Contact.Api.Data.Mongo
             return collection.Find(x => x.UUID == uUID).ToList();
         }
 
-        public List<string> GetContactUuidListByLocation(string location, MongoCollectionType collectionType)
-        {
-            var collection = MongoDatabase.GetCollection<InformationEntityModel>(collectionType.ToString("g"));
-            return collection.AsQueryable().Where(x => x.ContactInformationType == ContactInformationType.Location && x.InformationDescription == location).Select(x => x.UUID).ToList();
-        }
-
-        public List<ContactEntityModel> GetContactListListByUuid(List<string> contactInformations, MongoCollectionType collectionType)
-        {
-            var collection = MongoDatabase.GetCollection<ContactEntityModel>(collectionType.ToString("g"));
-            return collection.AsQueryable().Where(x => contactInformations.Contains(x.UUID)).ToList();
-        }
-
         public bool UpdateContact(ContactDto contactDto, MongoCollectionType collectionType)
         {
             var collection = MongoDatabase.GetCollection<ContactEntityModel>(collectionType.ToString("g"));

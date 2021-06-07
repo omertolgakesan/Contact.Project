@@ -12,10 +12,5 @@ namespace Contact.Api.Common
 
             return services;
         }
-
-        public static IApplicationBuilder UseLotteryCore(this IApplicationBuilder app)
-        {
-            return app;
-        }
     }
 }

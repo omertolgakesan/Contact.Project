@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Contact.Api.Common\Contact.Api.Common.csproj" />
+    <ProjectReference Include="..\Contact.Api.Queue\Contact.Api.Qeueu.csproj" />
     <ProjectReference Include="..\Contract.Api.Data.Mongo\Contact.Api.Data.Mongo.csproj" />
   </ItemGroup>
 

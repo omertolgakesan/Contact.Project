@@ -23,26 +23,6 @@ namespace Contact.Api.Mapper.Contact
 
             CreateMap<InformationEntityModel, ContactInformationDto>();
 
-            //CreateMap<List<InformationEntityModel>, ContactDetailDto>()
-            //.ForMember(x => x.Informations, opt => opt.MapFrom(y => y.Select(z =>
-            //      new ContactInformationDto
-            //      {
-            //          InformationDescription = z.InformationDescription,
-            //          ContactInformationType = z.ContactInformationType
-            //      })));
-
-
-            CreateMap<List<ContactEntityModel>, ContactReportDto>()
-            .ForMember(x => x.Contacts, opt => opt.MapFrom(x => x.Select(x =>
-            new ReportDto
-            {
-                Firm = x.Firm,
-                Lastname = x.Lastname,
-                Name = x.Name,
-                UUID = x.UUID
-            }).ToList()));
-
-
         }
     }
 }

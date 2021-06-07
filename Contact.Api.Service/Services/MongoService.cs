@@ -59,16 +59,6 @@ namespace Contact.Api.Service.Services
             return mongoProvider.GetContactList(collectionType);
         }
 
-        public List<ContactEntityModel> GetContactListListByUuid(List<string> contactInformations, MongoCollectionType collectionType)
-        {
-            return mongoProvider.GetContactListListByUuid(contactInformations, collectionType);
-        }
-
-        public List<string> GetContactUuidListByLocation(string location, MongoCollectionType collectionType)
-        {
-            return mongoProvider.GetContactUuidListByLocation(location, collectionType);
-        }
-
         public bool UpdateContact(ContactDto contactDto, MongoCollectionType collectionType)
         {
             return mongoProvider.UpdateContact(contactDto, collectionType);

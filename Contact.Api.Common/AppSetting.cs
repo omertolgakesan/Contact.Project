@@ -9,6 +9,7 @@ namespace Contact.Api.Common
         public List<ConnectionString> ConnectionStrings { get; set; }
         public List<ApplicationResponse> ApplicationResponses { get; set; }
         public MongoSetting MongoSettings { get; set; }
+        public QueueSetting QueueSettings { get; set; }
         public string CurrentLanguage { get; set; }
 
     }

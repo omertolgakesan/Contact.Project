@@ -18,6 +18,7 @@ using Contact.Api.Mapper;
 using Contact.Api.Data.Mongo;
 using Contact.Api.Services;
 using Contact.Api.Service.Services;
+using Contact.Api.Queue;
 
 namespace Contact.Api
 {
@@ -43,7 +44,11 @@ namespace Contact.Api
             services.AddScoped<IReportService, ReportService>();
             services.AddScoped<IContactService, ContactService>();
             services.AddScoped<IMongoService, MongoService>();
-
+            services.Configure<QueueSetting>(Configuration.GetSection("QueueSettings"));
+            services.AddScoped<IQueueService, QueueService>();
+            services.AddSingleton<IRabbitMQService, RabbitMQService>();
+            services.AddSingleton<IObjectFormatConverter, ObjectConvertFormater>();
+            services.AddSingleton<IProducerManager, ProducerManager>();
             services.Configure<MongoSetting>(Configuration.GetSection("MongoSettings"));
             services.AddSingleton<IMongoProvider, MongoProvider>();
 
@@ -67,7 +72,8 @@ namespace Contact.Api
             }
 
             app.UseHttpsRedirection();
-
+            app.UseSecurityMiddleware();
+            app.UseErrorHandlerMiddleware();
             app.UseRouting();
 
             app.UseAuthorization();

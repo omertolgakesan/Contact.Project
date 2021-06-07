@@ -17,8 +17,6 @@ namespace Contact.Api.Common.Conracts
         bool DeleteContactInformation(string uUID, MongoCollectionType collectionType);
         List<ContactEntityModel> GetContactList(MongoCollectionType collectionType);
         List<InformationEntityModel> GetContactInformationList(string uUID, MongoCollectionType collectionType);
-        List<string> GetContactUuidListByLocation(string location, MongoCollectionType collectionType);
-        List<ContactEntityModel> GetContactListListByUuid(List<string> contactInformations, MongoCollectionType collectionType);
         bool UpdateContact(ContactDto contactDto, MongoCollectionType collectionType);
         ContactEntityModel GetContact(string uuid, MongoCollectionType collectionType);
         bool DeleteContactInformation(List<InformationEntityModel> contactInformationEntityModels, MongoCollectionType collectionType);

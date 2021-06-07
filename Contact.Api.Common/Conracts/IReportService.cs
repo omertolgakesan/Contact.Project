@@ -7,6 +7,6 @@ namespace Contact.Api.Common.Conracts
 {
     public interface IReportService
     {
-        BaseServiceResponseModel<ContactReportDto> GetLocationReport(string location);
+        BaseServiceResponseModel<bool> LocationReport(string location);
     }
 }

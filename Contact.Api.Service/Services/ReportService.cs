@@ -15,49 +15,30 @@ namespace Contact.Api.Services
 {
     public class ReportService : IReportService
     {
-        private readonly IMongoService mongoService;
-        private readonly IMapperBase mapperBase;
-        private readonly IDistributedCache cacheService;
+        private readonly IQueueService queueService;
 
-        public ReportService(IMongoService iMongoService, IMapperBase iMapperBase, IDistributedCache distributedCache)
+        public ReportService(IQueueService iQueueService)
         {
-            mongoService = iMongoService;
-            mapperBase = iMapperBase;
-            cacheService = distributedCache;
+            queueService = iQueueService;
         }
 
-        public BaseServiceResponseModel<ContactReportDto> GetLocationReport(string location)
+        public BaseServiceResponseModel<bool> LocationReport(string location)
         {
             if (string.IsNullOrEmpty(location))
             {
-                return ResponseMessageHelper<ContactReportDto>.ResponseError(AppMessageConstants.EmptyParameter);
+                return ResponseMessageHelper<bool>.ResponseError(AppMessageConstants.EmptyParameter);
             }
 
-            string cacheKey = $"{CacheKeyHelper.Location_Report}_{location}";
-            var cacheData = cacheService.Get(cacheKey);
-            if (cacheData == null)
+            List<ContactReportProducerRequestModel> request = new()
             {
-                List<string> contactInformations = mongoService.GetContactUuidListByLocation(location, MongoCollectionType.Information);
-                List<ContactEntityModel> result = mongoService.GetContactListListByUuid(contactInformations, MongoCollectionType.Contact);
-                var retVal = mapperBase.Map<ContactReportDto>(result);
-                retVal.Location = location;
+                new ContactReportProducerRequestModel()
+                {
+                    Location = location
+                }
+            };
 
-                var json = JsonConvert.SerializeObject(retVal);
-                var retvalArray = Encoding.UTF8.GetBytes(json);
-
-                var options = new DistributedCacheEntryOptions()
-                        .SetSlidingExpiration(TimeSpan.FromHours(1))
-                        .SetAbsoluteExpiration(DateTime.Now.AddSeconds(60));
-                cacheService.Set(cacheKey, retvalArray, options);
-
-                return ResponseMessageHelper<ContactReportDto>.ResponseOk(retVal);
-            }
-            else
-            {
-                var json = Encoding.UTF8.GetString(cacheData);
-                var retval = JsonConvert.DeserializeObject<ContactReportDto>(json);
-                return ResponseMessageHelper<ContactReportDto>.ResponseOk(retval);
-            }
+            var retVal = queueService.LocationReport(request);
+            return ResponseMessageHelper<bool>.ResponseOk(retVal);
         }
     }
 }

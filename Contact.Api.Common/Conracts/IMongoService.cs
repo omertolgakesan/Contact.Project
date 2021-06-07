@@ -18,8 +18,6 @@ namespace Contact.Api.Common.Conracts
         bool DeleteContactInformation(string UUID, MongoCollectionType ınformation);
         List<ContactEntityModel> GetContactList(MongoCollectionType collectionType);
         List<InformationEntityModel> GetContactInformationList(string uUID, MongoCollectionType collectionType);
-        List<string> GetContactUuidListByLocation(string location, MongoCollectionType ınformation);
-        List<ContactEntityModel> GetContactListListByUuid(List<string> contactInformations, MongoCollectionType contact);
         bool UpdateContact(ContactDto contactDto, MongoCollectionType contact);
         bool DeleteContactInformation(List<InformationEntityModel> contactInformationEntityModels, MongoCollectionType ınformation);
     }

@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Contact.Api.Common.Dto
+namespace Contact.Api.Common.Models
 {
-    public class ContactReportDto
+    public class ContactReportProducerRequestModel
     {
         public string Location { get; set; }
-        public List<ReportDto> Contacts { get; set; }
-
     }
 }

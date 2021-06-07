@@ -8,6 +8,5 @@ namespace Contact.Api.Common.Helper
     {
         public const string Contact_List = "CONTACT_LIST";
         public const string Contact = "CONTACT";
-        public const string Location_Report = "LOCATION";
     }
 }

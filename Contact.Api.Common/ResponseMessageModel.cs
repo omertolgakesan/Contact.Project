@@ -7,11 +7,6 @@ namespace Contact.Api.Common
 {
     public class ResponseMessageModel
     {
-        public ResponseMessageModel()
-        {
-
-        }
-
         [JsonProperty(PropertyName = "c")]
         public int Code { get; set; }
         [JsonProperty(PropertyName = "m")]

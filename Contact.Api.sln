@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contact.Api.Data.Mongo", "C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contact.Api.Mapper", "Contact.Api.Mapper\Contact.Api.Mapper.csproj", "{208B6A1C-F295-40E7-AAB4-6CE74593CBF3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contact.Api.Test", "Contact.Api.Test\Contact.Api.Test.csproj", "{24FC4526-C5D7-43CF-B3D8-860A510710C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contact.Api.Test", "Contact.Api.Test\Contact.Api.Test.csproj", "{24FC4526-C5D7-43CF-B3D8-860A510710C2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contact.Api.Qeueu", "Contact.Api.Queue\Contact.Api.Qeueu.csproj", "{30ED61A0-C4F8-48D1-A37B-0D7DF394FF89}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{24FC4526-C5D7-43CF-B3D8-860A510710C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{24FC4526-C5D7-43CF-B3D8-860A510710C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{24FC4526-C5D7-43CF-B3D8-860A510710C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30ED61A0-C4F8-48D1-A37B-0D7DF394FF89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30ED61A0-C4F8-48D1-A37B-0D7DF394FF89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30ED61A0-C4F8-48D1-A37B-0D7DF394FF89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30ED61A0-C4F8-48D1-A37B-0D7DF394FF89}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

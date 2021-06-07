@@ -27,9 +27,9 @@ namespace Contact.Api.Controllers
         /// <param name="location"></param>
         /// <returns></returns>
         [HttpGet]
-        public BaseServiceResponseModel<ContactReportDto> GetLocationReport(string location)
+        public BaseServiceResponseModel<bool> LocationReport(string location)
         {
-           return reportService.GetLocationReport(location);
+           return reportService.LocationReport(location);
         }
     }
 }
